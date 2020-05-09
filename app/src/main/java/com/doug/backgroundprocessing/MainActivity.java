@@ -1,13 +1,12 @@
 package com.doug.backgroundprocessing;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.doug.backgroundprocessing.AsyncTask.AsyncTaskExample;
-import com.doug.backgroundprocessing.ThreadHandlers.ThreadHandlers;
-import com.doug.backgroundprocessing.ThreadHandlers.ThreadPoolExample;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.doug.backgroundprocessing.Chronometer.ChronometerActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,12 +15,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView textview =  findViewById(R.id.textview);
+        TextView textview = findViewById(R.id.textview);
 //        ThreadHandlers threadHandlers = new ThreadHandlers();
 //        threadHandlers.startNewThread(textview);
 //        AsyncTaskExample asyncTaskExample = new AsyncTaskExample();
 //        asyncTaskExample.startAsyncTask(textview);
-        ThreadPoolExample threadPoolExample = new ThreadPoolExample();
-        threadPoolExample.startNewThread(textview);
+//        ThreadPoolExample threadPoolExample = new ThreadPoolExample();
+//        threadPoolExample.startNewThread(textview);
+        Intent intent = new Intent(this, ChronometerActivity.class);
+        startActivity(intent);
     }
 }
