@@ -18,6 +18,8 @@
         </activity>
         <activity android:name=".Chronometer.ChronometerActivity" />
         <service android:name=".Chronometer.ChronometerService"/>
+        <activity android:name=".CountdownTimer.CountdownActivity" />
+        <service android:name=".CountdownTimer.CountdownService"/>
     </application>
 
 </manifest>
