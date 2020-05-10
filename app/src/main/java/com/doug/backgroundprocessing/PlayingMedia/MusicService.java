@@ -1,13 +1,19 @@
 package com.doug.backgroundprocessing.PlayingMedia;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Binder;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 
+import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.doug.backgroundprocessing.R;
@@ -15,13 +21,25 @@ import com.doug.backgroundprocessing.R;
 
 public class MusicService extends Service {
 
-
-    private int mCount = 0;
     public static String INT_VALUE = "INT_VALUE";
-    public static String STATUS_VALUE = "STATUS_VALUE";
     Handler handler;
     MediaPlayer mediaPlayer;
 
+
+    private Notification createNotification() {
+        createNotificationChannel();
+        Intent notificationIntent = new Intent(this, MusicActivity.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "chanel")
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setContentTitle("textTitle")
+                .setContentText("textContent")
+                .setContentIntent(pendingIntent)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        return builder.build();
+    }
 
     // Binder given to clients
     private final IBinder iBinder = new LocalBinder();
@@ -41,6 +59,8 @@ public class MusicService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        createNotification();
+        startForeground(1, createNotification());
 
     }
 
@@ -64,7 +84,6 @@ public class MusicService extends Service {
                 broadCastIntent.setAction(MusicLocalBroadcastReceiver.ACTION_CHRONOMETER);
                 broadCastIntent.putExtra(MusicLocalBroadcastReceiver.VALUE_INT, mediaPlayer.getCurrentPosition() / 1000);
                 LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(broadCastIntent);
-                mCount++;
                 handler.postDelayed(this, 1000);
             }
         });
@@ -78,13 +97,29 @@ public class MusicService extends Service {
         mediaPlayer.pause();
     }
 
-    public void resume(){
+    public void resume() {
         mediaPlayer.start();
     }
 
     public class LocalBinder extends Binder {
         public MusicService getService() {
             return MusicService.this;
+        }
+    }
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "name";
+            String description = "test";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("chanel", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
         }
     }
 

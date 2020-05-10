@@ -1,9 +1,14 @@
 package com.doug.backgroundprocessing.PlayingMedia;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.View;
@@ -12,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.doug.backgroundprocessing.MainActivity;
@@ -40,10 +46,14 @@ public class MusicActivity extends AppCompatActivity implements MusicLocalBroadc
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, intentFilter);
     }
 
+
+
     public void startService(View view) {
+
+
         if (!serviceBound) {
             Intent playerIntent = new Intent(this, MusicService.class);
-            startService(playerIntent);
+            startForegroundService(playerIntent);
             bindService(playerIntent, serviceConnection, BIND_AUTO_CREATE);
         } else {
             //Service is active
@@ -83,4 +93,8 @@ public class MusicActivity extends AppCompatActivity implements MusicLocalBroadc
             serviceBound = false;
         }
     };
+
+
+
+
 }
