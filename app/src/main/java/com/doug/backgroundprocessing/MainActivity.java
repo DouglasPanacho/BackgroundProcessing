@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.doug.backgroundprocessing.Chronometer.ChronometerActivity;
 import com.doug.backgroundprocessing.CountdownTimer.CountdownActivity;
+import com.doug.backgroundprocessing.PlayingMedia.MusicActivity;
 import com.doug.backgroundprocessing.ThreadHandlers.ThreadHandlers;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,7 +27,9 @@ public class MainActivity extends AppCompatActivity {
 //        threadPoolExample.startNewThread(textview);
 //        Intent intent = new Intent(this, ChronometerActivity.class);
 //        startActivity(intent);
-        Intent intent = new Intent(this, CountdownActivity.class);
+//        Intent intent = new Intent(this, CountdownActivity.class);
+//        startActivity(intent);
+        Intent intent = new Intent(this, MusicActivity.class);
         startActivity(intent);
     }
 }

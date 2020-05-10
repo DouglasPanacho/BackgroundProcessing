@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.IBinder;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -32,10 +33,11 @@ public class CountdownService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         final Intent broadCastIntent = new Intent();
         broadCastIntent.setAction(CountdownLocalBroadcastReceiver.ACTION_COUNTDOWN);
-         countDownTimer = new CountDownTimer(30000, 1000) {
+         countDownTimer = new CountDownTimer(300000, 1000) {
             @Override
             public void onTick(long currentValue) {
                 broadCastIntent.putExtra(CountdownLocalBroadcastReceiver.VALUE_INT, currentValue / 1000);
+                Log.d("Test",""+currentValue/1000);
                 LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(broadCastIntent);
             }
 
