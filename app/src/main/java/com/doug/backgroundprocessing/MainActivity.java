@@ -10,12 +10,15 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
 import com.doug.backgroundprocessing.Chronometer.ChronometerActivity;
 import com.doug.backgroundprocessing.CountdownTimer.CountdownActivity;
 import com.doug.backgroundprocessing.JobSchedulers.Job;
 import com.doug.backgroundprocessing.PlayingMedia.MusicActivity;
 import com.doug.backgroundprocessing.ThreadHandlers.ThreadHandlers;
+import com.doug.backgroundprocessing.Work.Work;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 //        startActivity(intent);
 //        Intent intent = new Intent(this, MusicActivity.class);
 //        startActivity(intent);
-        startJobsScheduler();
+        startWorker();
     }
 
     private void startJobsScheduler() {
@@ -47,5 +50,12 @@ public class MainActivity extends AppCompatActivity {
         JobScheduler jobScheduler = (JobScheduler) getSystemService(JOB_SCHEDULER_SERVICE);
         jobScheduler.schedule(jobInfo.build());
 
+    }
+
+    private void startWorker() {
+        OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(Work.class)
+                .setConstraints(Work.createConstraints())
+                .build();
+        WorkManager.getInstance(this).enqueue(oneTimeWorkRequest);
     }
 }
