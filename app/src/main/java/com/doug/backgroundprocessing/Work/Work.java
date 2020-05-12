@@ -5,6 +5,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.work.Constraints;
+import androidx.work.Data;
 import androidx.work.NetworkType;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
@@ -18,7 +19,7 @@ public class Work extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -29,13 +30,14 @@ public class Work extends Worker {
             Log.d("Job Started", "Current value = " + i);
         }
 
-
-        return Result.success();
+        Data data = new Data.Builder().putInt("teste", 1).build();
+        return Result.success(data);
     }
 
-    public static Constraints createConstraints(){
+    public static Constraints createConstraints() {
         // This is not a must, if we don´t set the constraints the work will execute as normal
-        Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.UNMETERED).build();
+        Constraints constraints = new Constraints.Builder().setRequiredNetworkType(
+                NetworkType.UNMETERED).build();
         return constraints;
     }
 }
