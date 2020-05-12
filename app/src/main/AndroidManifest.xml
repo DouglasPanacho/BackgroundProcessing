@@ -24,6 +24,9 @@
         <service android:name=".CountdownTimer.CountdownService"/>
         <activity android:name=".PlayingMedia.MusicActivity" />
         <service android:name=".PlayingMedia.MusicService"/>
+        <service android:name=".JobSchedulers.Job"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+    />
     </application>
 
 </manifest>
