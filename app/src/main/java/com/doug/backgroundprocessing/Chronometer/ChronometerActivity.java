@@ -1,5 +1,7 @@
 package com.doug.backgroundprocessing.Chronometer;
 
+import com.doug.backgroundprocessing.R;
+
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -9,8 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-
-import com.doug.backgroundprocessing.R;
 
 public class ChronometerActivity extends AppCompatActivity implements ChronometerLocalBroadcastReceiver.UpdateView {
 

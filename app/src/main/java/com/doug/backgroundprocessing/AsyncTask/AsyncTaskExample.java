@@ -1,11 +1,7 @@
 package com.doug.backgroundprocessing.AsyncTask;
 
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Looper;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
 
 public class AsyncTaskExample {
 

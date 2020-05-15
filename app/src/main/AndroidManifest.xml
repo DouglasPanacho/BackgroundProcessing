@@ -19,14 +19,18 @@
             </intent-filter>
         </activity>
         <activity android:name=".Chronometer.ChronometerActivity" />
-        <service android:name=".Chronometer.ChronometerService"/>
+
+        <service android:name=".Chronometer.ChronometerService" />
         <activity android:name=".CountdownTimer.CountdownActivity" />
-        <service android:name=".CountdownTimer.CountdownService"/>
+        <service android:name=".CountdownTimer.CountdownService" />
         <activity android:name=".PlayingMedia.MusicActivity" />
-        <service android:name=".PlayingMedia.MusicService"/>
-        <service android:name=".JobSchedulers.Job"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-    />
+
+        <service android:name=".PlayingMedia.MusicService" />
+        <service
+            android:name=".JobSchedulers.Job"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <service android:name=".BoundServices.BoundService" />
     </application>
 
 </manifest>

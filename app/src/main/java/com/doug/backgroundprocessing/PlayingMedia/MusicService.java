@@ -1,5 +1,7 @@
 package com.doug.backgroundprocessing.PlayingMedia;
 
+import com.doug.backgroundprocessing.R;
+
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -15,8 +17,6 @@ import android.os.IBinder;
 
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-
-import com.doug.backgroundprocessing.R;
 
 
 public class MusicService extends Service {
